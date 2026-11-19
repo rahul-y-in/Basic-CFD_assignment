@@ -1,0 +1,39 @@
+#!/usr/bin/gnuplot
+
+
+clear
+reset
+
+# Set output terminal (e.g., for viewing on screen)
+#set terminal qt
+set terminal pngcairo size 1200,1000
+#set terminal svg size 1200,1200 background "white"
+
+# Set a title for the graph
+
+# Set labels for the axes
+set xlabel "Iterations" font ",24" offset 0,-1
+set ylabel "||residual||_2" offset -2 font ",24"
+
+set tics font ",24"
+# Set the y-axis to logarithmic scale (default is base 10)
+set logscale y
+
+# Format the y-axis tic labels to exponential notation
+set format y "10^{%T}"
+
+set lmargin 6
+set rmargin 4
+set tmargin 4
+set bmargin 6
+set size ratio 1
+set key font ",22"
+
+set grid
+
+set output "iteration_errors.png"
+# Plot the data, specifying a different color for each line
+plot  "iter_vs_res_norm_ADI.dat" using 1:2 with lines title "||r||_2  in ADI." linecolor "dark-green" dashtype (5,5) linewidth 3, \
+     "iter_vs_res_norm_lineGS.dat" using 1:2 with lines title "||r||_2  in LineGS." linecolor "blue" dashtype (5,5) linewidth 3, \
+     "iter_vs_res_norm_pointGS.dat" using 1:2 with lines title "||r||_2  in pointGS." linecolor "black" dashtype (5,5) linewidth 3
+unset output

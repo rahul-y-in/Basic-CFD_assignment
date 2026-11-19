@@ -1,0 +1,60 @@
+# ==========================================
+# Gnuplot Script: Multi-column Contour Plot
+# ==========================================
+
+# 1. Terminal and Output Settings
+set terminal pngcairo size 2560,1200 font "Helvetica,10"
+set output "contour_plots.png"
+
+# 2. Multiplot Layout (1 row, 3 columns)
+set multiplot layout 1,3 title "Contour Comparison: Countours at different times, ADI, CN imex, explicit, implicit" font "Helvetica,12"
+
+# 3. Global Contour & Map Settings
+set contour base
+set cntrparam levels 20          # Number of contour levels
+unset surface                    # Hide the 3D surface mesh
+set view map                     # 2D top-down view (map projection)
+set grid                         # Enable grid for readability
+set xlabel "X "
+set ylabel "Y "
+
+L = 0.3       # Domain length/width (modify to match your data)
+H = 0.4         # Domain height (modify to match your data)
+N_terms = 200   # Number of terms for series convergence approximation
+
+f(x, y) = 2.0 * sum [n=1:N_terms] ((1.0 - (-1.0)**n) / (n * pi)) * \
+          (sinh(n * pi * y / L) / sinh(n * pi * H / L)) * sin(n * pi * x / L)
+   
+T(x, y, Ty0, TyH) = Ty0 * f(x, H - y) + TyH * f(x, y)
+   
+Ty0_1 = 40.0     # Temperature at y = 0 for case 1
+TyH_1 = 10.0   # Temperature at y = H for case 1
+
+# 4. Contour Labeling Settings
+set cntrlabel font "Helvetica,7"
+set cntrlabel start 5            # Controls label placement density
+set cntrlabel interval 20
+set key off
+
+set title "At t=200"
+splot "Temp_dist_ADI_dt_0.2.dat" using 1:2:1002 with lines lc rgb "blue" notitle,\
+        "Temp_dist_CN_imex_dt_0.2.dat" using 1:2:1002 with lines lc rgb "green" notitle,\
+        "Temp_dist_implicit_dt_0.2.dat" using 1:2:1002 with lines lc rgb "red" notitle,\
+        "Temp_dist_explicit_dt_0.2.dat" using 1:2:1002 with lines lc rgb "red" notitle,\
+       # T(x, y, Ty0_1, TyH_1) with lines lc rgb "black" dt 2 title "Analytical"
+
+set title "At t = 10"
+splot "Temp_dist_ADI_dt_0.2.dat" using 1:2:52 with lines lc rgb "blue" notitle,\
+        "Temp_dist_CN_imex_dt_0.2.dat" using 1:2:52 with lines lc rgb "green" notitle,\
+        "Temp_dist_implicit_dt_0.2.dat" using 1:2:52 with lines lc rgb "red" notitle,\
+        "Temp_dist_explicit_dt_0.2.dat" using 1:2:52 with lines lc rgb "red" notitle,\
+        #T(x, y, Ty0_1, TyH_1) with lines lc rgb "black" dt 2 title "Analytical"
+
+set title "At t = 428, steady state"
+splot "Temp_dist_ADI_dt_0.2.dat" using 1:2:2142 with lines lc rgb "blue" notitle,\
+        "Temp_dist_CN_imex_dt_0.2.dat" using 1:2:2142 with lines lc rgb "green" notitle,\
+        "Temp_dist_implicit_dt_0.2.dat" using 1:2:2142 with lines lc rgb "red" notitle,\
+        "Temp_dist_explicit_dt_0.2.dat" using 1:2:2142 with lines lc rgb "red" notitle,\
+        T(x, y, Ty0_1, TyH_1) with lines lc rgb "black" dt 2 title "Analytical"
+# 5. Clean up multiplot
+unset multiplot

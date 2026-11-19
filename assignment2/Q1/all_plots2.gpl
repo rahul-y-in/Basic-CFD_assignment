@@ -1,0 +1,56 @@
+# ==========================================
+# Gnuplot Script: Multi-column Contour Plot
+# ==========================================
+
+# 1. Terminal and Output Settings
+set terminal pngcairo size 2560,1440 font "Helvetica,10"
+set output "contour_plots2.png"
+
+# 2. Multiplot Layout (1 row, 3 columns)
+set multiplot layout 1,3 title "Contour Comparison: Point GS, Line GS, ADI" font "Helvetica,12"
+
+# 3. Global Contour & Map Settings
+set contour base
+set cntrparam levels 50          # Number of contour levels
+unset surface                    # Hide the 3D surface mesh
+set view map                     # 2D top-down view (map projection)
+set grid                         # Enable grid for readability
+set xlabel "X "
+set ylabel "Y "
+
+L = 0.3       # Domain length/width (modify to match your data)
+H = 0.4         # Domain height (modify to match your data)
+N_terms = 200    # Number of terms for series convergence approximation
+
+f(x, y) = 2.0 * sum [n=1:N_terms] ((1.0 - (-1.0)**n) / (n * pi)) * \
+          (sinh(n * pi * y / L) / sinh(n * pi * H / L)) * sin(n * pi * x / L)
+   
+T(x, y, Ty0, TyH) = Ty0 * f(x, H - y) + TyH * f(x, y)
+   
+Ty0_1 = 40.0     # Temperature at y = 0 for case 1
+TyH_1 = 10.0   # Temperature at y = H for case 1
+
+# 4. Contour Labeling Settings
+set cntrlabel font "Helvetica,7"
+set cntrlabel start 5            # Controls label placement density
+set cntrlabel interval 20
+set key off
+# --- Panel 1: Column 3 ---
+set title "Point_GS"
+splot "Temp_dist_w_1.4.dat" using 1:2:3 with lines lc rgb "blue" title "w=1.4",\
+        "Temp_dist_w_1.0.dat" using 1:2:3 with lines lc rgb "green" title "w=1.0",\
+        "Temp_dist_w_0.6.dat" using 1:2:3 with lines lc rgb "red" title "w=0.6",\
+        T(x, y, Ty0_1, TyH_1) with lines lc rgb "black" dt 2 title "Analytical"
+set title "LineGS"
+splot "Temp_dist_w_1.4.dat" using 1:2:4 with lines lc rgb "blue" title "w=1.4",\
+        "Temp_dist_w_1.0.dat" using 1:2:4 with lines lc rgb "green" title "w=1.0",\
+        "Temp_dist_w_0.6.dat" using 1:2:4 with lines lc rgb "red" title "w=0.6",\
+        T(x, y, Ty0_1, TyH_1) with lines lc rgb "black" dt 2 title "Analytical"
+# --- Panel 3: Column 5 ---
+set title "ADI"
+splot "Temp_dist_w_1.4.dat" using 1:2:5 with lines lc rgb "blue" title "w=1.4",\
+        "Temp_dist_w_1.0.dat" using 1:2:5 with lines lc rgb "green" title "w=1.0",\
+        "Temp_dist_w_0.6.dat" using 1:2:5 with lines lc rgb "red" title "w=0.6",\
+        T(x, y, Ty0_1, TyH_1) with lines lc rgb "black" dt 2 title "Analytical"
+# 5. Clean up multiplot
+unset multiplot
