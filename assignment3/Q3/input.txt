@@ -1,0 +1,13 @@
+&input_parameters
+z1=0.0d0	!leftmost spatial coordinate
+z2=1.0d0	!rightmost spatial coordinate
+t_final=2.0d0
+np=2		!number of problems
+res_tol=1.0d-4
+/
+
+&list
+dt= 0.1d-1, 0.2d-2
+dz= 0.2d-1, 0.5d-2
+mu= 1.0d-2, 1.0d-3
+/

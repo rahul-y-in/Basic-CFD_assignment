@@ -1,0 +1,12 @@
+&input_parameters
+z1=0.0d0	!leftmost spatial coordinate
+z2=1.0d0	!rightmost spatial coordinate
+t_final=0.2d0
+dz=0.4d-2
+ndt=2		!number of time-step-sizes
+mu=1.0d-3
+/
+
+&list
+dt= 0.1d-2, 0.2d-2
+/

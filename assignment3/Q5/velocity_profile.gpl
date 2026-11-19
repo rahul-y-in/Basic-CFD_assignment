@@ -1,0 +1,37 @@
+#!/usr/bin/gnuplot
+
+
+clear
+reset
+
+# Set output terminal (e.g., for viewing on screen)
+#set terminal qt
+#set terminal pngcairo size 1200,1000
+set terminal svg size 1200,1200 background "white"
+
+# Set a title for the graph
+
+# Set labels for the axes
+set xlabel "eta" font ",24" offset 0,-1
+set ylabel "u/U" offset -2 font ",24"
+
+set tics font ",24"
+# Set the y-axis to logarithmic scale (default is base 10)
+#set logscale y
+
+# Format the y-axis tic labels to exponential notation
+#set format y "10^{%T}"
+
+set lmargin 6
+set rmargin 4
+set tmargin 4
+set bmargin 6
+set size ratio 1
+set key font ",22"
+
+set grid
+
+set output "profile.svg"
+# Plot the data, specifying a different color for each line
+plot  "BL_Solution.dat" using 1:3 with lines notitle linecolor "dark-green" dashtype (5,5) linewidth 3  
+unset output

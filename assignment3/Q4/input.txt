@@ -1,0 +1,12 @@
+&input_parameters
+z1=0.0d0	
+z2=0.5d0	!Computational domain height
+t_final=4.0d0	!Computational domain length
+dt=1.0d-4
+dz=1.0d-3
+nu=1.0d-4
+u_inf=1.0d0
+t=4.0d0		!bnd layer thickness at t, used to non-dimensionalise the y-coordinate
+/
+
+Here t refers to the x-coordinate and z refers to the y-coordinate.

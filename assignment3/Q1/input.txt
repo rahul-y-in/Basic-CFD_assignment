@@ -1,0 +1,14 @@
+&input_parameters
+x0=0.0d0	!leftmost spatial coordinate
+x1=1.0d0	!rightmost spatial coordinate
+ux0=0.0d0	!Initial Condition
+u0t=100.0d0	!left bc
+u1t=0.0d0	!right bc
+r=0.10d0
+Co=0.40d0
+np=21		!number of spatial grid points
+res_tol=1.0d-6
+max_t=200
+/
+
+

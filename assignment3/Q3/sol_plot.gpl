@@ -1,0 +1,45 @@
+#!/usr/bin/gnuplot
+
+
+clear
+reset
+
+# Set output terminal (e.g., for viewing on screen)
+#set terminal qt
+#set terminal pngcairo size 1200,1000
+set terminal svg size 1200,1200 background "white"
+
+# Set a title for the graph
+
+# Set labels for the axes
+set xlabel "x" font ",24" offset 0,-1
+set ylabel "u(x)" offset -2 font ",24"
+
+set tics font ",24"
+# Set the y-axis to logarithmic scale (default is base 10)
+#set logscale x
+
+# Format the y-axis tic labels to exponential notation
+#set format y "10^{%T}"
+
+set lmargin 6
+set rmargin 4
+set tmargin 4
+set bmargin 6
+set size ratio 1
+set key font ",22"
+
+set grid
+
+set output "steady_state_sol_Pr1.svg"
+# Plot the data, specifying a different color for each line
+plot  "Pr_1_FTCS_Solution_ssc_85.dat" using 1:87 with lines title "FTCS_Solution.dat" linecolor "dark-green" dashtype (5,5) linewidth 3,\
+	"Pr_1_MacCormack_Solution_ssc_88.dat" using 1:90 with lines title "MacCormack_Solution" linecolor "blue" dashtype (5,5) linewidth 3
+unset output
+
+#set logscale x
+set output "steady_state_sol_Pr2.svg"
+# Plot the data, specifying a different color for each line
+plot  "Pr_2_FTCS_Solution_ssc_346.dat" using 1:348 with lines title "FTCS_Solution" linecolor "dark-green" dashtype (5,5) linewidth 3,\
+	"Pr_2_MacCormack_Solution_ssc_345.dat" using 1:347 with lines title "MacCormack_Solution" linecolor "blue" dashtype (5,5) linewidth 3
+unset output

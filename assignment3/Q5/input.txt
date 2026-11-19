@@ -1,0 +1,18 @@
+&input_parameters
+z1=0.0d0	
+z2=10.0d0	
+f1=0.0d0
+f2=0.0d0
+f2_inf=1.0d0
+f31=0.0d0
+f32=1.0d0
+dz=1.0d-2
+res_tol=1.0d-6
+max_iter=2000
+search_val=0.99d0
+/
+
+z refers to the coordinate eta. 
+fj is initial value for function j. 
+f31 and f32 are the two initial guesses for the initial value function 3. 
+f2_inf is the given value of f2 at infinity (or high z value).
