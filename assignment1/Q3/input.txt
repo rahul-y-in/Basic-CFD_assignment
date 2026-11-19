@@ -1,0 +1,11 @@
+&input_parameters
+L=0.1d0
+dz=1.0d-5
+k=0.1d0
+bnd1=100.0d0
+bnd2=50.0d0
+source=0.0d0
+h=25.0d0
+T_inf=300.0d0
+flux=200.0d0
+/

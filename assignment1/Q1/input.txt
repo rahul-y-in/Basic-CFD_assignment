@@ -1,0 +1,8 @@
+&input_parameters_Q1
+L=0.5d0
+dz=1.0d-3
+k=1.0d0
+bnd1=100.0d0
+bnd2=500.0d0
+source=0.0d0
+/

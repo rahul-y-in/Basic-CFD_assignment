@@ -1,0 +1,12 @@
+&input_parameters
+L=130.0d-3
+dz=1.0d-5
+k1=0.15d0
+k2=0.038d0
+k3=0.1d0
+bnd1=600.0d0
+bnd2=400.0d0
+source=0.0d0
+x_i1=10.0d-3
+x_i2=110.0d-3
+/

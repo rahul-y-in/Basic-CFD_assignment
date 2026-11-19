@@ -1,0 +1,9 @@
+&input_parameters
+L=1.0d0
+dz=5.0d-2
+time_span=0.5d0
+time_step=1.0d-4
+diffusivity=1.0d0
+T_initial=100.0d0
+T_surface=300.0d0
+/

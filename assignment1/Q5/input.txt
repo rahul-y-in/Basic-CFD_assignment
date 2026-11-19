@@ -1,0 +1,11 @@
+&input_parameters
+L=0.5d0
+dz=1.0d-4
+T_initial=00.0d0
+bnd1=373.15d0
+bnd2=773.15d0
+source=0.0d0
+beta=-1.0d-3
+betaVal='negative'
+eps_tol=1.0d-8
+/
