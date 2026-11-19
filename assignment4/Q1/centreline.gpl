@@ -1,0 +1,58 @@
+#!/usr/bin/gnuplot
+
+
+clear
+reset
+
+# Set output terminal (e.g., for viewing on screen)
+#set terminal qt
+set terminal pngcairo size 1600,1600
+#set terminal svg size 1200,1200 background "white"
+
+# Set labels for the axes
+set xlabel "z-coordinate" font ",24" offset 0,-1
+set ylabel "velocity(u)" offset -2 font ",24"
+
+set tics font ",24"
+# Set the y-axis to logarithmic scale (default is base 10)
+#set logscale y
+
+# Format the y-axis tic labels to exponential notation
+#set format y "10^{%T}"
+
+set lmargin 6
+set rmargin 4
+set tmargin 4
+set bmargin 6
+set size ratio 1
+set key font ",24"
+set xrange [-0.5:0.5]
+set grid
+
+set output "vertical_centreline_velocity_Re_100.png"
+# Plot the data, specifying a different color for each line
+plot  "vertical_centreline_Re_100.00.dat" using 3:6 with lines title "vel. u at centreline" linecolor "dark-green" linewidth 3, \
+     "ghia-100u.dat" using 2:1 with points title "vel. u Ghia" pt 3 ps 3 #linecolor "blue" dashtype (5,5) linewidth 3
+unset output
+
+set output "vertical_centreline_velocity_Re_400.png"
+# Plot the data, specifying a different color for each line
+plot  "vertical_centreline_Re_400.00.dat" using 3:6 with lines title "vel. u at centreline" linecolor "dark-green" linewidth 3, \
+     "ghia-400u.dat" using 2:1 with points title "vel. u Ghia" pt 3 ps 3 #linecolor "blue" dashtype (5,5) linewidth 3
+unset output
+
+# Set labels for the axes
+set xlabel "y-coordinate" font ",24" offset 0,-1
+set ylabel "velocity(v)" offset -2 font ",24"
+
+set output "horizontal_centreline_velocity_Re_100.png"
+# Plot the data, specifying a different color for each line
+plot  "horizontal_centreline_Re_100.00.dat" using 2:7 with lines title "vel. v at centreline" linecolor "dark-green" linewidth 3, \
+     "ghia-v.dat" using 3:1 with points title "vel. v Ghia" pt 3 ps 3 #linecolor "blue" dashtype (5,5) linewidth 3
+unset output
+
+set output "horizontal_centreline_velocity_Re_400.png"
+# Plot the data, specifying a different color for each line
+plot  "horizontal_centreline_Re_400.00.dat" using 2:7 with lines title "vel. v at centreline" linecolor "dark-green" linewidth 3, \
+     "ghia-v.dat" using 3:2 with points title "vel. v Ghia" pt 3 ps 3 #linecolor "blue" dashtype (5,5) linewidth 3
+unset output

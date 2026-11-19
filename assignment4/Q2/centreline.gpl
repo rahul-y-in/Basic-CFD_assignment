@@ -1,0 +1,36 @@
+#!/usr/bin/gnuplot
+
+
+clear
+reset
+
+# Set output terminal (e.g., for viewing on screen)
+#set terminal qt
+set terminal pngcairo size 1600,1600
+#set terminal svg size 1200,1200 background "white"
+
+# Set labels for the axes
+set xlabel "velocity(u)" font ",24" offset 0,-1
+set ylabel "z-coordinate" offset -2 font ",24"
+
+set tics font ",24"
+# Set the y-axis to logarithmic scale (default is base 10)
+#set logscale y
+
+# Format the y-axis tic labels to exponential notation
+#set format y "10^{%T}"
+
+set lmargin 6
+set rmargin 4
+set tmargin 4
+set bmargin 6
+set size ratio 1
+set key font ",24"
+#set xrange [-0.5:0.5]
+set grid
+
+set output "u_velocity_at_separation_Re_100.png"
+# Plot the data, specifying a different color for each line
+plot  "separation_Re_100.00.dat" using 6:3 with lines title "vel. u at separation" linecolor "dark-green" linewidth 3
+unset output
+

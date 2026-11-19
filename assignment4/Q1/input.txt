@@ -1,0 +1,16 @@
+&input_parameters
+ny=128
+nz=128
+Ly=2.0d0
+Lz=2.0d0
+A=1.4d0
+U0=50.0d0
+iter1=1000000
+iter2=26000
+dt=1.0d-5
+dt2=1.0d-5
+res_tol=1.0d-5
+Re=100.0d0
+/
+
+

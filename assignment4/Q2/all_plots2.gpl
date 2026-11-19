@@ -1,0 +1,67 @@
+# ----------------------------------------------------
+# Global Configurations
+# ----------------------------------------------------
+set terminal pngcairo size 2400,2400 enhanced font 'Arial,30'
+set size square
+set xlabel "y"
+set ylabel "z"
+set xrange [-8:15]
+#set yrange [-0.5:0.5]
+#unset key
+
+# ----------------------------------------------------
+# a) Plot Streamlines (Contours of psi)
+# ----------------------------------------------------
+set output 'streamlines_Re_100.png'
+set title "Streamlines ({/Symbol y})"
+
+# Enable 2D map view and contouring
+set view map
+unset surface
+set contour base
+
+# Set the number of contour levels
+set cntrparam levels auto 100
+unset clabel 
+
+# Plot column 3 (psi) against columns 1 (y) and 2 (z)
+splot 'backward_step_Re_100.00.dat' using 1:2:3 with lines lc rgb "blue" title ''
+
+#set output 'streamlines_Re_400.png'
+#splot 'driven_cavity_Re_400.00.dat' using 1:2:3 with lines lc rgb "blue" title ''
+# ----------------------------------------------------
+# b) Plot Velocity Vectors (u, v)
+# ----------------------------------------------------
+set output 'velocity_vectors_Re_100.png'
+set title "Velocity Vectors"
+
+# Disable contours for the vector plot
+unset contour
+
+# Plot vectors using u (col 5) and v (col 6). 
+# Note: 'every 2:2' skips every other point to prevent the plot from being too cluttered. 
+# Adjust 'every 1:1' if you want to see all vectors.
+
+scale= 0.5
+plot 'backward_step_Re_100.00.dat' using 1:2:($5*scale):($6*scale) every 4:4 with vectors lw 2 lc rgb "black" title '' #head filled size 0.0015,15,45 lw 3 lc rgb "black" title ''
+
+#set output 'velocity_vectors_Re_400.png'
+#plot 'driven_cavity_Re_400.00.dat' using 1:2:5:6 every 4:4 with vectors head filled size 0.015,15,45 lc rgb "black" title ''
+# ----------------------------------------------------
+# c) Plot Vorticity Contours (Contours of omega)
+# ----------------------------------------------------
+set output 'vorticity_contours_Re_100.png'
+set title "Vorticity Contours ({/Symbol w})"
+
+# Re-enable 2D map view and contouring
+set view map
+unset surface
+set contour base
+set cntrparam levels auto 1000
+#unset clabel
+
+# Plot column 4 (omega) against columns 1 (y) and 2 (z)
+splot 'backward_step_Re_100.00.dat' using 1:2:4 with lines lc rgb "red" title ''
+
+#set output 'vorticity_contours_Re_400.png'
+#splot 'driven_cavity_Re_400.00.dat' using 1:2:4 with lines lc rgb "red" title ''
